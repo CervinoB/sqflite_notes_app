@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_notes_app/model/note.dart';
 import 'package:path/path.dart';
@@ -72,7 +75,21 @@ class NotesDatabase {
 
     if (maps.isNotEmpty) {
       return Note.fromJson(maps.first);
+    } else {
+      throw Exception('ID $id not found!');
     }
+  }
+
+  Future<List<Note>> readAllNotes() async {
+    final db = await instance.database;
+
+    const orderBy = '${NoteFields.time} ASC';
+    // final result =
+    //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
+
+    final result = await db.query(tableNotes, orderBy: orderBy);
+
+    return result.map((json) => Note.fromJson(json)).toList();
   }
 
   Future close() async {
