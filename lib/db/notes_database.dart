@@ -1,7 +1,3 @@
-import 'dart:convert';
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_notes_app/model/note.dart';
 import 'package:path/path.dart';
@@ -93,7 +89,7 @@ class NotesDatabase {
     return result.map((json) => Note.fromJson(json)).toList();
   }
 
-  Future<int> uptade(Note note) async {
+  Future<int> updade(Note note) async {
     final db = await instance.database;
 
     return db.update(
