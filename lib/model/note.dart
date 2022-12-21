@@ -26,6 +26,23 @@ class Note {
     required this.createdTime,
   });
 
+  Note copy({
+    int? id,
+    bool? isImportant,
+    int? number,
+    String? title,
+    String? description,
+    DateTime? createdTime,
+  }) =>
+      Note(
+        id: id ?? this.id,
+        isImportant: isImportant ?? this.isImportant,
+        number: number ?? this.number,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        createdTime: createdTime ?? this.createdTime,
+      );
+
   Map<String, Object?> toJson() => {
         NoteFields.id: id,
         NoteFields.title: title,

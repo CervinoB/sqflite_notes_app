@@ -48,10 +48,9 @@ class NotesDatabase {
   Future<Note> create(Note note) async {
     final db = await instanse.database;
 
-    final id = await db.insert(
-      tableNotes,
-      note.toJson(),
-    );
+    final id = await db.insert(tableNotes, note.toJson());
+
+    return note.copy(id: id);
   }
 
   Future close() async {
