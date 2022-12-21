@@ -25,4 +25,14 @@ class Note {
     required this.description,
     required this.createdTime,
   });
+
+  Map<String, Object?> toJson() => {
+        NoteFields.id: id,
+        NoteFields.title: title,
+        NoteFields.isImportant:
+            isImportant ? 1 : 0, //have to convert bc its how the db understand
+        NoteFields.number: number,
+        NoteFields.description: description,
+        NoteFields.time: createdTime.toIso8601String(),
+      };
 }
