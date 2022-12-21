@@ -1,6 +1,11 @@
 const String tableNotes = 'notes';
 
 class NoteFields {
+  static final List<String> values = [
+    // add all fields
+    id, isImportant, number, title, description, time
+  ];
+
   static const String id = '_id';
   static const String isImportant = 'isImportant';
   static const String number = 'number';
@@ -41,6 +46,15 @@ class Note {
         title: title ?? this.title,
         description: description ?? this.description,
         createdTime: createdTime ?? this.createdTime,
+      );
+
+  static Note fromJson(Map<String, Object?> json) => Note(
+        id: json[NoteFields.id] as int?,
+        isImportant: json[NoteFields.isImportant] == 1,
+        number: json[NoteFields.number] as int,
+        title: json[NoteFields.title] as String,
+        description: json[NoteFields.description] as String,
+        createdTime: DateTime.parse(json[NoteFields.time] as String),
       );
 
   Map<String, Object?> toJson() => {

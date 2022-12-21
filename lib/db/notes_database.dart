@@ -3,7 +3,7 @@ import 'package:sqflite_notes_app/model/note.dart';
 import 'package:path/path.dart';
 
 class NotesDatabase {
-  static final NotesDatabase instanse = NotesDatabase._init();
+  static final NotesDatabase instance = NotesDatabase._init();
 
   static Database? _database;
 
@@ -46,7 +46,7 @@ class NotesDatabase {
   }
 
   Future<Note> create(Note note) async {
-    final db = await instanse.database;
+    final db = await instance.database;
 
     // final json = note.toJson();
     // const columns =
@@ -60,8 +60,23 @@ class NotesDatabase {
     return note.copy(id: id);
   }
 
+  Future<Note> readNote(int id) async {
+    final db = await instance.database;
+
+    final maps = await db.query(
+      tableNotes,
+      columns: NoteFields.values,
+      where: '${NoteFields.id} = ?',
+      whereArgs: [id],
+    );
+
+    if (maps.isNotEmpty) {
+      return Note.fromJson(maps.first);
+    }
+  }
+
   Future close() async {
-    final db = await instanse.database;
+    final db = await instance.database;
     db.close();
   }
 }
