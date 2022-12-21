@@ -33,7 +33,7 @@ class _NotesPageState extends State<NotesPage> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-    this.notes = await NotesDatabase.instance.readAllNotes();
+    notes = await NotesDatabase.instance.readAllNotes();
 
     setState(() => isLoading = false);
   }
