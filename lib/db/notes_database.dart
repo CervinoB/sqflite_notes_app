@@ -28,7 +28,7 @@ class NotesDatabase {
   }
 
   Future _createDB(Database db, int version) async {
-    const idType = 'INTEGER PRIMARY KAY AUTOINCREMENT';
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
     const boolType = 'BOOLEAN NOT NULL';
     const integerType = 'INTEGER NOT NULL';
@@ -40,7 +40,7 @@ class NotesDatabase {
       ${NoteFields.number} $integerType,
       ${NoteFields.title} $textType,
       ${NoteFields.description} $textType,
-      ${NoteFields.time} $textType,
+      ${NoteFields.time} $textType
     )
      ''');
   }
